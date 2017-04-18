@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <script src="./js/konva.min.js"></script>
+    <script src="./js/Histogram.js"></script>
+</head>
+<body>
+<!--//将konva舞台放到这里面-->
+<div id="container">
+
+</div>
+
+<script>
+    //创建一个舞台
+    var stage = new Konva.Stage(
+            {
+                container: 'container',
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
+    );
+
+    var layer = new Konva.Layer();
+    stage.add(layer);
+    //舞台中心坐标
+    var centX = stage.width()/2;
+    var centY = stage.height()/2;
+    //绘制区域的宽度和高度
+    var width = (3/4)*stage.width();
+    var height = stage.height()/2;
+    //坐标系
+    var x0 = stage.width()/8;
+    var y0 = (3/4)*stage.height();
+    //柱状图的数据
+    var data = [
+        { name: '前端', value: '.8', color: 'green'},
+        { name: 'PHP', value: '.3', color: 'blue'},
+        { name: 'Java', value: '.7', color: 'red'},
+        { name: 'UI', value: '.9', color: 'orange'},
+        { name: 'IOS', value: '.4', color: 'purple'},
+        { name: 'Android', value: '.9', color: 'pink'}
+    ];
+    var rectWidth = width/data.length;//得到每个矩形的宽度
+
+    var histogram = new Histogram({
+        x:x0,
+        y:y0,
+        width:width,
+        height:height,
+        data:data,
+        rectWidth:rectWidth,
+        layer:layer,
+    });
+
+    histogram.addToStage(stage);
+    histogram.mAnimate(stage);
+
+
+</script>
+</body>
+</html>
